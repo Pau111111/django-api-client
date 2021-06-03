@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Hola</h1>
+    <div class="container">
+      <!-- <a
+        href="data:application/octet-stream;charset=utf-16le;base64,//5mAG8AbwAgAGIAYQByAAoA"
+        download="file.txt"
+      >
+        File link</a
+      > -->
+    </div>
+    <script>
+      var url1 = "http://127.0.0.1:8000/api/company/1";
+      var url2 = "https://jsonplaceholder.typicode.com/posts";
+
+      var settings = {
+        url: url1,
+        method: "GET",
+        timeout: 0,
+        headers: {
+          Authorization: "Api-Key 0N2xnFU1.SYDx1uMbGsyqAQ3s0gJlNJio1npfaJn1",
+          //   "Access-Control-Allow-Origin": "*",
+          //   "Access-Control-Allow-Credentials": "true",
+          //   "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+          //   "Access-Control-Allow-Headers":
+          // "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, accept, Content-type",
+        },
+      };
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        download("test.txt", response);
+      });
+
+      function download(filename, text) {
+        var element = document.createElement("a");
+        element.setAttribute(
+          "href",
+          "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+        );
+        element.setAttribute("download", filename);
+
+        element.style.display = "none";
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      }
+    </script>
+  </body>
+</html>
